@@ -1,0 +1,49 @@
+/* pages/timecard/normal/normal.wxss */
+@import "../../common/lib/weui.wxss";
+
+.picker {
+  padding: 19rpx 26rpx;
+  background-color: #fff;
+}
+
+.display-container {
+  align-items: center;
+  justify-content: center;
+  /*border: 1px solid grey;*/
+  margin: 10px;
+  text-align: center;
+}
+
+.clock {
+  font-size: 3.4em;
+  font-weight: 500;
+  /*color: #006df0;*/
+  align-self: center;
+}
+
+.ClaimButton {
+  background-color: #41a1e8;
+  width: 90%;
+  height: 84rpx;
+  font-size: 32rpx;
+  position: absolute;
+  top: 700rpx;
+  color: #fff;
+  left: 37.5rpx;
+}
+
+.InputStyle {
+  left: 10rpx;
+}
+
+.empty {
+  width: 100%;
+  height: 20px;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}

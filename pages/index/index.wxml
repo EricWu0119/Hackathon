@@ -1,0 +1,34 @@
+<!--index.wxml-->
+<import src="../common/head.wxml" />
+<import src="../common/foot.wxml" />
+
+<view class="container" wx:for="{{list}}" wx:for-index="id">
+  <view class='Description'>
+    <image src="../../image/tittle.png" class='imgTittle'></image>
+    <view class='formTittle'>
+      <text class="textTittle">{{item.title}}</text>
+    </view>
+    <view class='form'>
+      <view>
+        <image src="../../image/clock.png" class="Imgall"></image>
+        <text class='textAll'>{{item.updateTime}}</text>
+      </view>
+    </view>
+    <view class='form'>
+      <view>
+        <image src="../../image/location.png" class="Imgall"></image>
+        <text class='textAll'>{{item.location}}</text>
+      </view>
+    </view>
+    <view class='form'>
+      <view>
+        <image src="../../image/people.png" class="Imgall"></image>
+        <text class='textAll'>{{item.lecturer}}</text>
+      </view>
+    </view>
+  </view>
+  <button class='ClaimButton' bindtap='ClockIn'>
+    <text>请签到</text>
+  </button>
+
+</view>

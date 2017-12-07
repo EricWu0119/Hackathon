@@ -1,0 +1,43 @@
+<!--pages/timecard/normal/normal.wxml-->
+<import src="../../common/head.wxml" />
+<import src="../../common/foot.wxml" />
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">{{errorMessage}}</view>
+    <view class="empty" />
+    <!--Time  -->
+    <view class="display-container">
+      <text class="clock">{{displayTime}}</text>
+    </view>
+    <!-- Input -->
+    <view class="weui-cells weui-cells_after-title" style='font-size: 32rpx;'>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">邮箱地址</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" bindinput="bindemailInput" placeholder="请输入您的邮箱" />
+        </view>
+      </view>
+    </view>
+    <!-- location -->
+    <view class="page-section">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">所在位置</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" type="text" disabled="{{true}}" name="locName" value="{{UI[uindex].locNameContent}}" name="name"></input>
+        </view>
+      </view>
+    </view>
+
+    <!-- Button -->
+    <view class="weui-btn-area">
+       <button class="ClaimButton" type="" bindtap="bindPublish">请提交</button> 
+       <!-- <button class="ClaimButton" bindtap="getUserInfo"> 获取头像昵称 </button> -->
+    </view>
+  </view>
+</view>
+
+ 

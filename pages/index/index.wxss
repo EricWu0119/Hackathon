@@ -1,0 +1,73 @@
+/**index.wxss**/
+@import "../common/index.wxss";
+
+.imgTittle {
+  width: 100%;
+  height: 400rpx;
+}
+
+.form {
+  border-bottom: 3rpx solid #ddd;
+  font-size: 32rpx;
+  height: 88rpx;
+  position: relative;
+  font-family: PingFangSC-Regular;
+  background-color: #fff;
+  /* font-weight: bold; */
+}
+
+.Imgall {
+  width: 45rpx;
+  height: 45rpx;
+  /* border-radius: 50%; */
+  position: absolute;
+  left: 48rpx;
+  top: 16rpx;
+}
+
+.textAll {
+  position: absolute;
+  left: 160.25rpx;
+  top: 15rpx;
+
+  /* font-size: 28rpx; */
+}
+
+.Tittle {
+  border-bottom: 3rpx solid #ddd;
+  font-size: 36rpx;
+  height: 108rpx;
+  position: relative;
+  font-family: PingFangSC-Regular;
+  background-color: #fff;
+}
+
+.textTittle {
+  position: absolute;
+  /* left: 48rpx;
+  top: 15rpx; */
+  padding: 10rpx 24rpx 10rpx 24rpx;
+  /* font-size: 28rpx; */
+}
+
+.formTittle {
+  border-bottom: 3rpx solid #ddd;
+  font-size: 32rpx;
+  height: 128rpx;
+  position: relative;
+  font-family: PingFangSC-Regular;
+  background-color: #fff;
+  font-weight: bold;
+  /* font-weight: bold; */
+}
+
+.ClaimButton {
+  background-color: #41a1e8;
+  width: 90%;
+  height: 84rpx;
+  font-size: 32rpx;
+  position: absolute;
+  top: 880rpx;
+  color: #fff;
+  left: 37.5rpx;
+}
