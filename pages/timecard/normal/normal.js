@@ -33,10 +33,10 @@ Page({
     // var that = this;
     app.getUserInfo();
     let userInfo = app.globalData;
-    console.log(userInfo);
-    // this.setData({
-    //   userId: userInfo.nickName
-    // });
+    console.log(userInfo.userInfo.userId);
+    this.setData({
+      userId: userInfo.userInfo.userId
+    });
   //  console.log(app.globalData);
     // var userInfo = getApp().globalData;
     // console.log(userInfo);
@@ -138,35 +138,35 @@ Page({
     });
 
     var that = this //创建一个名为that的变量来保存this当前的值  
-    debugger;
+    // debugger;
     wx.request({
       url: 'https://www.todaynowork.group/wechat-du-1.0//courseParticipant/checkin',
       method: 'post',
       data: {
-        "email": this.data.email, //这里是发送给服务器的参数（参数名：参数值） 
-        "number": this.data.id,
-        "userId": this.userId
+        "mail": this.data.email, //这里是发送给服务器的参数（参数名：参数值） 
+        "courseScheduleId": this.data.id,
+        "userId": this.data.userId
       },
       header: {
-        'content-type': 'application/x-www-form-urlencoded'  //这里注意POST请求content-type是小写，大写会报错  
+        'content-type': 'application/json' // 默认值   
       },
       success: function (res) {
-        // that.setData({ //这里是修改data的值  
-        //   test: res.data //test等于服务器返回来的数据  
-        // });
-        // wx.navigateTo({
-        //   url: "../../settings/settings"
-        // })
+
         console.log(res.data)
         wx.showToast({
           title: '预约成功',
           icon: 'success',
-          duration: 3000
+          duration: 5000
         });
+        wx.reLaunch({
+          url: "../../index/index"
+        });
+
         // wx.navigateTo({
         //   url: '../../index/index',
         // })
-      }, fail: function () {
+      }, fail: function (res) {
+        console.log(res.data)
         wx.showToast({
           title: '预约失败',
           icon: 'success',
