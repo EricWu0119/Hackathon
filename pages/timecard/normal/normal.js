@@ -138,20 +138,15 @@ Page({
     });
 
     var that = this //创建一个名为that的变量来保存this当前的值  
-    // debugger;
-    wx.request({
-      url: 'https://www.todaynowork.group/wechat-du-1.0//courseParticipant/checkin',
+
+    let requestConf = {
       method: 'post',
       data: {
         "mail": this.data.email, //这里是发送给服务器的参数（参数名：参数值） 
-        "courseScheduleId": this.data.id,
-        "userId": this.data.userId
-      },
-      header: {
-        'content-type': 'application/json' // 默认值   
+          "courseScheduleId": this.data.id,
+            "userId": this.data.userId
       },
       success: function (res) {
-
         console.log(res.data)
         wx.showToast({
           title: '预约成功',
@@ -161,10 +156,6 @@ Page({
         wx.reLaunch({
           url: "../../index/index"
         });
-
-        // wx.navigateTo({
-        //   url: '../../index/index',
-        // })
       }, fail: function (res) {
         console.log(res.data)
         wx.showToast({
@@ -173,7 +164,45 @@ Page({
           duration: 3000
         });
       }
-    });
+    };
+
+    app.wxRequest("/courseParticipant/checkin", requestConf);
+    // debugger;
+    // wx.request({
+    //   url: 'https://www.todaynowork.group/wechat-du-1.0//courseParticipant/checkin',
+    //   method: 'post',
+    //   data: {
+    //     "mail": this.data.email, //这里是发送给服务器的参数（参数名：参数值） 
+    //     "courseScheduleId": this.data.id,
+    //     "userId": this.data.userId
+    //   },
+    //   header: {
+    //     'content-type': 'application/json' // 默认值   
+    //   },
+    //   success: function (res) {
+
+    //     console.log(res.data)
+    //     wx.showToast({
+    //       title: '预约成功',
+    //       icon: 'success',
+    //       duration: 5000
+    //     });
+    //     wx.reLaunch({
+    //       url: "../../index/index"
+    //     });
+
+    //     // wx.navigateTo({
+    //     //   url: '../../index/index',
+    //     // })
+    //   }, fail: function (res) {
+    //     console.log(res.data)
+    //     wx.showToast({
+    //       title: '预约失败',
+    //       icon: 'success',
+    //       duration: 3000
+    //     });
+    //   }
+    // });
   }
 })
 
