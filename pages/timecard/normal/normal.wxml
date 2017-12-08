@@ -16,7 +16,7 @@
           <view class="weui-label">邮箱地址</view>
         </view>
         <view class="weui-cell__bd">
-          <input class="weui-input" bindinput="bindemailInput" placeholder="请输入您的Internet Id" />
+          <input class="weui-input" bindinput="bindemailInput" placeholder="请输入您的Internet Id" value="{{email}}"/>
         </view>
       </view>
     </view>

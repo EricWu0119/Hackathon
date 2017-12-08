@@ -30,12 +30,12 @@ Page({
   },
   onLoad: function (options) {
     // get global info'
-    // var that = this;
-    app.getUserInfo();
-    let userInfo = app.globalData;
-    console.log(userInfo.userInfo.userId);
-    this.setData({
-      userId: userInfo.userInfo.userId
+    var that = this;
+    app.getUserInfo(function(userInfo){
+      that.setData({
+        userId: userInfo.userId,
+        email: userInfo.email
+      });
     });
   //  console.log(app.globalData);
     // var userInfo = getApp().globalData;

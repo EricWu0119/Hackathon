@@ -80,6 +80,8 @@
 //app.js
 App({
   onLaunch: function () {
+
+
     //进入应用时检查语言设置
     var language = wx.getStorageSync('selectedLanguage');
     if (language) {
@@ -103,6 +105,9 @@ App({
     wx.login({
       success: function (res) {
         if (res.code) {
+          wx.showLoading({
+              title: '加载中'
+          });
           //发起网络请求
           let openIdReqConf = {
             // url: '/loginPostTest',
@@ -120,22 +125,24 @@ App({
               if (res.data.errcode) {
                 console.log(res.data);
                 console.log("did not get openid");
+                wx.hideLoading();
               } else {
                 that.globalData.token = res.data.sessionid;
                 that.globalData.openId = res.data.openId;
-                that.wxRequest("/forumjson", {
-                  sucess: function (res) {
-                    console.log(res.data);
-                  }
+                that.getUserInfo(function(){
+                  wx.hideLoading();
                 });
-                that.getUserInfo();
               }
+            },
+            fail: function (error) {
+              wx.hideLoading();
             },
             method: 'POST'
           };
           that.wxRequest("/login", openIdReqConf);
         } else {
-          console.log('获取用户登录态失败！' + res.errMsg)
+          console.log('获取用户登录态失败！' + res.errMsg);
+          wx.hideLoading();
         }
       }
     });
@@ -167,12 +174,17 @@ App({
                 //get customize user info, image
                 that.globalData.userInfo.email = res.data.email;
                 that.globalData.userInfo.userId = res.data.id;
+                typeof cb == "function" && cb(that.globalData.userInfo)
               }
+              wx.hideLoading();
+            },
+            fail: function (error) {
+              wx.hideLoading();
             },
             method: 'POST'
           };
           that.wxRequest("/user", userReqConf);
-          typeof cb == "function" && cb(that.globalData.userInfo)
+          
         }
       })
     }
@@ -194,7 +206,7 @@ App({
     },
     userInfo: null,
     hasLogin: false,
-    apiContextUrl: 'https://todaynowork.group/wechat-du-1.0',
+    apiContextUrl: 'https://todaynowork.group/wechat-prod-1.0',
     // apiContextUrl: 'http://localhost:8080',
     token: 'null',
     openId: null
