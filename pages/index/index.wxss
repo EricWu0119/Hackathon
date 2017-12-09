@@ -8,8 +8,8 @@
 
 .form {
   border-bottom: 3rpx solid #ddd;
-  font-size: 32rpx;
-  height: 88rpx;
+  font-size: 28rpx;
+  height: 78rpx;
   position: relative;
   font-family: PingFangSC-Regular;
   background-color: #fff;
@@ -27,7 +27,7 @@
 
 .textAll {
   position: absolute;
-  left: 160.25rpx;
+  left: 140rpx;
   top: 15rpx;
 
   /* font-size: 28rpx; */
@@ -35,7 +35,7 @@
 
 .Tittle {
   border-bottom: 3rpx solid #ddd;
-  font-size: 36rpx;
+  font-size: 28rpx;
   height: 108rpx;
   position: relative;
   font-family: PingFangSC-Regular;
@@ -70,4 +70,13 @@
   top: 880rpx;
   color: #fff;
   left: 37.5rpx;
+}
+
+.textAllTime {
+  position: absolute;
+  left: 140rpx;
+  top: 20rpx;
+  font-size: 28rpx;
+
+  /* font-size: 28rpx; */
 }

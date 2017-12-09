@@ -1,5 +1,6 @@
 //index.js
 //获取应用实例
+var util = require('../../utils/util.js')
 var app = getApp()
 Page({
   data: {
@@ -14,7 +15,6 @@ Page({
       url: '../timecard/normal/normal?infoStr=' + infoStr,
     })
   },
-
   onLoad: function (options) {
     // console.log('themes.onLoad');
     var that = this;
@@ -28,12 +28,19 @@ Page({
         var temp = [];
         temp.push(data);
         that.setData({ list: temp });
+        var startTime = util.formatTime(new Date(res.data.startTime));
+        var endEndtime = util.formatTime(new Date(res.data.endEndtime));
+        that.setData({ 
+          startTime: startTime,
+          endEndtime: endEndtime
+          });
+        console.log(startTime);
       },
       fail: function (error) {
         console.log(error)
       }
     };
-
+  
     app.wxRequest("/courseSchedule/" + courseId, requestConf);
 
     requestConf = {

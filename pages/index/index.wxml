@@ -11,7 +11,7 @@
     <view class='form'>
       <view>
         <image src="../../image/clock.png" class="Imgall"></image>
-        <text class='textAll'>{{item.updateTime}}</text>
+        <text class='textAllTime'>{{startTime}} -- {{endEndtime}}</text>
       </view>
     </view>
     <view class='form'>
