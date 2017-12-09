@@ -1,8 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/PersonList/PersonList",
     "pages/timecard/normal/normal",
+    "pages/PersonList/PersonList",
     "pages/settings/settings"
   ],
   "window": {

@@ -130,27 +130,28 @@ Page({
       this.showTopTips()
       return
     }
-    var self = this;
+    // var self = this;
     wx.showToast({
       title: '签到发布中...',
       icon: 'loading',
       duration: 3000
     });
-
+    var id = this.data.id;
+    console.log(id);
+    wx.navigateTo({
+      url: '../../PersonList/PersonList?scheduleId=' + id,
+    });
     var that = this //创建一个名为that的变量来保存this当前的值  
 
     let requestConf = {
       method: 'post',
       data: {
         "mail": this.data.email, //这里是发送给服务器的参数（参数名：参数值） 
-          "courseScheduleId": this.data.id,
-            "userId": this.data.userId
+        "courseScheduleId": this.data.id,
+        "userId": this.data.userId
       },
       success: function (res) {
         console.log(res.data)
-        wx.reLaunch({
-          url: "../../PersonList/PersonList"
-        });
         wx.showToast({
           title: '预约成功',
           icon: 'success',
@@ -168,8 +169,8 @@ Page({
         });
       }
     };
-
     app.wxRequest("/courseParticipant/checkin", requestConf);
+    
     // debugger;
     // wx.request({
     //   url: 'https://www.todaynowork.group/wechat-du-1.0//courseParticipant/checkin',
