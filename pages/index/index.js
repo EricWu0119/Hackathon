@@ -3,7 +3,8 @@
 var app = getApp()
 Page({
   data: {
-    list: []
+    list: [],
+    isNeedSign:false
   },
   ClockIn: function (e){
     var info = this.data.list[0];
@@ -34,22 +35,46 @@ Page({
     };
 
     app.wxRequest("/courseSchedule/" + courseId, requestConf);
-    // 加载数据
 
-    // wx.request({
-    //   // url: 'http://news-at.zhihu.com/api/4/themes',
-    //   url: 'https://www.todaynowork.group/wechat-du-1.0/courseSchedule/12',
-    //   header: { "Content-Type": "application/json" },
-    //   success: function (res) {
-    //     var data = res.data;
-    //     console.log(data);
-    //     var temp = [];
-    //     temp.push(data);
-    //     that.setData({ list: temp });
-    //   },
-    //   fail: function (error) {
-    //     console.log(error)
-    //   }
-    // });
+    requestConf = {
+      success: function (res) {
+        var data = res.data;
+        console.log(data);
+        var temp = [];
+        temp.push(data);
+        that.setData({ list: temp });
+      },
+      fail: function (error) {
+        console.log(error)
+      }
+    };
+
+    app.wxRequest("/courseSchedule/" + courseId, requestConf);
+
+    app.getUserInfo(function(userInfo){
+      let requestConf1 = {
+        data: {
+          courseId: courseId,
+          userId: userInfo.userId
+        },
+        success: function (res) {
+          var checkInValue = res.data.checkIn;
+          
+          if (checkInValue == 1){
+            that.setData({ isNeedSign: false });
+          }else{
+            that.setData({ isNeedSign: true });
+          }
+        },
+        fail: function (error) {
+          console.log(error)
+        }
+      };
+
+      app.wxRequest("/courseParticipant/is_checkin", requestConf1);
+    });
+    
+
+
   }
 })
