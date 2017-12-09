@@ -4,7 +4,7 @@
 
 <view class="container" wx:for="{{list}}" wx:for-index="id">
   <view class='Description'>
-    <image src="../../image/tittle.png" class='imgTittle'></image>
+    <image src="../../image/java.png" class='imgTittle'></image>
     <view class='formTittle'>
       <text class="textTittle">{{item.title}}</text>
     </view>

@@ -46,18 +46,20 @@
   position: absolute;
   /* left: 48rpx;
   top: 15rpx; */
-   padding: 10rpx 124rpx 10rpx 124rpx; 
+  padding: 10rpx 24rpx 10rpx 24rpx;
   /* font-size: 28rpx; */
+  color: #41A1E8;
 }
 
 .formTittle {
   border-bottom: 3rpx solid #ddd;
-  font-size: 32rpx;
-  height: 88rpx;
+  font-size: 48rpx;
+  height: 108rpx;
   position: relative;
   font-family: PingFangSC-Regular;
-  background-color: #fff;
+  background-color: #F9F9F9;
   font-weight: bold;
+  padding: 10rpx 0 0 60rpx;
   /* font-weight: bold; */
 }
 
@@ -70,4 +72,13 @@
   top: 880rpx;
   color: #fff;
   left: 37.5rpx;
+}
+
+.ImgallHome {
+  width: 45rpx;
+  height: 45rpx;
+  /* border-radius: 50%; */
+  position: absolute;
+  right: 80rpx;
+  top: 33rpx;
 }

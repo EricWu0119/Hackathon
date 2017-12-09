@@ -148,19 +148,22 @@ Page({
       },
       success: function (res) {
         console.log(res.data)
+        wx.reLaunch({
+          url: "../../PersonList/PersonList"
+        });
         wx.showToast({
           title: '预约成功',
           icon: 'success',
-          duration: 5000
-        });
-        wx.reLaunch({
-          url: "../../index/index"
+          duration: 3000
         });
       }, fail: function (res) {
         console.log(res.data)
+        wx.reLaunch({
+          url: "../../index/index"
+        });
         wx.showToast({
-          title: '预约失败',
-          icon: 'success',
+          title: '签到失败...',
+          icon: 'loading',
           duration: 3000
         });
       }
