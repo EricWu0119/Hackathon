@@ -101,26 +101,20 @@ Page({
       console.log(startTime);
     });
 
-    // requestConf = {
-    //   success: function (res) {
-    //     var data = res.data;
-    //     console.log(data);
-    //     var temp = [];
-    //     temp.push(data);
-    //     that.setData({ list: temp });
-    //   },
-    //   fail: function (error) {
-    //     console.log(error)
-    //   }
-    // };
+    let  requestConf2 = {
+      success: function (res) {
+        var data = res.data[0].nickName;
+        console.log(data);
+        // var temp = [];
+        // temp.push(data);
+        that.setData({ name: data });
+      },
+      fail: function (error) {
+        console.log(error)
+      }
+    };
 
-    // app.wxRequestP("/courseSchedule/" + courseId, {}).then((res)=>{
-    //   var data = res.data;
-    //   console.log(data);
-    //   var temp = [];
-    //   temp.push(data);
-    //   that.setData({ list: temp });
-    // });
+    app.wxRequest("/courseParticipant/getTeacherByScheduleId/" + courseId, requestConf2);
 
     var signP = app.getUserInfoP().then((userInfo) => {
       let requestConf1 = {
