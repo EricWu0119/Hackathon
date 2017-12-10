@@ -7,7 +7,8 @@ var app = getApp()
 Page({
   data: {
     list: [],
-    isNeedSign:false
+    isNeedSign:false,
+    isLoading:false
   },
   ClockIn: function (e){
     var info = this.data.list[0];
@@ -78,6 +79,10 @@ Page({
     // };
   
     // app.wxRequest("/courseSchedule/" + courseId, requestConf);
+    // this.data.isLoading = true;
+    this.setData({
+      isLoading:true
+    })
     wx.showLoading({
       title: '正在初始化',
     })
@@ -138,6 +143,10 @@ Page({
     
     Promise.all([courseP,signP]).then((values)=>{
       wx.hideLoading()
+      // that.data.isLoading = false;
+      that.setData({
+        isLoading:false
+      })
     });
 
   }

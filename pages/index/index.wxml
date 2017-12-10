@@ -27,8 +27,8 @@
       </view>
     </view>
   </view>
-  <button class='ClaimButton' bindtap='ClockIn'>
-    <!-- <button class='ClaimButton' bindtap='ClockIn' disabled='{{!isNeedSign}}'> -->
+   <!-- <button class='ClaimButton' bindtap='ClockIn'>  -->
+      <button class='ClaimButton' bindtap='ClockIn' disabled='{{isLoading}}'>  
     <text>{{isNeedSign==true? "请签到":"取消"}}</text>
   </button>
 
