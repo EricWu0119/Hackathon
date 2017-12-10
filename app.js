@@ -23,58 +23,70 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
-    this.getUserInfoP().then((userInf)=>console.log(userInf));
-
+    // var that = this;
+    // this.getUserInfoP()
+    //   .then((userInfo)=>{
+    //     console.log(userInfo)
+    //     that.globalData.userInfo = userInfo
+    //   });
   },
-  getUserInfoP: function (cb) {
+  getUserInfoP: function () {
     var that = this;
-    wsAPI.login()
-    .then((res)=>{
-      if (res.code) {
-
-        //发起网络请求
-        let openIdReqConf = {
-          data: {
-            code: res.code
-          }
-        };
-        return that.wxRequestP("/login", openIdReqConf);
-      }
-
-    }).then((res)=>{
-        that.globalData.token = res.data.sessionid;
-        that.globalData.openId = res.data.openId;
-        return wsAPI.getUserInfo({
-                    withCredentials: true
-                  });
-    }).then((res)=>{
-        that.globalData.userInfo = res.userInfo;
-        let userReqConf = {
-            data: {
-              // openId: that.globalData.openId,
-              avatarUrl: res.userInfo.avatarUrl,
-              // email: '',
-              nickName: res.userInfo.nickName
-            },
-            method: 'POST'
-        };
-        return that.wxRequestP("/user", userReqConf);
-    },()=>wsAPI.stop()).then((res)=>{
-
+    var userInfo = {}
+    if(that.globalData.userInfo){
       return new Promise((resolve, reject) => {
-        if (res.data.errcode) {
-          console.log(res.data);
-          reject(res.data);
-        } else {
-          //get customize user info, image
-          that.globalData.userInfo.email = res.data.email;
-          that.globalData.userInfo.userId = res.data.id;
-          resolve(that.globalData.userInfo);
-        }
+        resolve(that.globalData.userInfo);
       });
+    }else{
+      return wsAPI.login()
+      .then((res)=>{
+        if (res.code) {
 
-    });
+          //发起网络请求
+          let openIdReqConf = {
+            data: {
+              code: res.code
+            },
+            method:'POST'
+          };
+          return that.wxRequestP("/login", openIdReqConf);
+        }
+
+      }).then((res)=>{
+          that.globalData.token = res.data.sessionid;
+          that.globalData.openId = res.data.openId;
+          return wsAPI.getUserInfo({
+                      withCredentials: true
+                    });
+      }).then((res)=>{
+          userInfo = res.userInfo;
+          let userReqConf = {
+              data: {
+                // openId: that.globalData.openId,
+                avatarUrl: res.userInfo.avatarUrl,
+                // email: '',
+                nickName: res.userInfo.nickName
+              },
+              method: 'POST'
+          };
+          return that.wxRequestP("/user", userReqConf);
+      },()=>wsAPI.stop()).then((res)=>{
+
+        return new Promise((resolve, reject) => {
+          if (res.data.errcode) {
+            console.log(res.data);
+            reject(res.data);
+          } else {
+            //get customize user info, image
+            userInfo.email = res.data.email;
+            userInfo.userId = res.data.id;
+            that.globalData.userInfo = userInfo
+            resolve(userInfo);
+          }
+        });
+      });      
+    }
+
   },
   getUserInfo: function (cb) {
     var that = this
