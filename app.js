@@ -1,3 +1,4 @@
+var wsAPI = require('utils/wsAPI.js')
 //app.js
 App({
   onLaunch: function () {
@@ -23,8 +24,58 @@ App({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
 
-  },
+    this.getUserInfoP().then((userInf)=>console.log(userInf));
 
+  },
+  getUserInfoP: function (cb) {
+    var that = this;
+    wsAPI.login()
+    .then((res)=>{
+      if (res.code) {
+
+        //发起网络请求
+        let openIdReqConf = {
+          data: {
+            code: res.code
+          }
+        };
+        return that.wxRequestP("/login", openIdReqConf);
+      }
+
+    }).then((res)=>{
+        that.globalData.token = res.data.sessionid;
+        that.globalData.openId = res.data.openId;
+        return wsAPI.getUserInfo({
+                    withCredentials: true
+                  });
+    }).then((res)=>{
+        that.globalData.userInfo = res.userInfo;
+        let userReqConf = {
+            data: {
+              // openId: that.globalData.openId,
+              avatarUrl: res.userInfo.avatarUrl,
+              // email: '',
+              nickName: res.userInfo.nickName
+            },
+            method: 'POST'
+        };
+        return that.wxRequestP("/user", userReqConf);
+    },()=>wsAPI.stop()).then((res)=>{
+
+      return new Promise((resolve, reject) => {
+        if (res.data.errcode) {
+          console.log(res.data);
+          reject(res.data);
+        } else {
+          //get customize user info, image
+          that.globalData.userInfo.email = res.data.email;
+          that.globalData.userInfo.userId = res.data.id;
+          resolve(that.globalData.userInfo);
+        }
+      });
+
+    });
+  },
   getUserInfo: function (cb) {
     var that = this
     if (this.globalData.userInfo) {
@@ -99,6 +150,15 @@ App({
         }
       });
     }
+  },
+  wxRequestP: function (apiPath, requestConf) {
+    let url = this.globalData.apiContextUrl + apiPath;
+    requestConf.url = url;
+    if (this.globalData.token) {
+      requestConf.header = requestConf.header || {};
+      requestConf.header['x-auth-token'] = this.globalData.token;
+    }
+    return wsAPI.request(requestConf);
   },
   wxRequest: function (apiPath, requestConf) {
     let url = this.globalData.apiContextUrl + apiPath;
