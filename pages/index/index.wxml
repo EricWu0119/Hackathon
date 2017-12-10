@@ -23,7 +23,7 @@
     <view class='form'>
       <view>
         <image src="../../image/people.png" class="Imgall"></image>
-        <text class='textAll'>{{item.lecturer}}</text>
+        <text class='textAll'>{{name}}</text>
       </view>
     </view>
   </view>
