@@ -40,12 +40,12 @@
   <text class="textStyle">文档教程</text>
   <image src="../../image/java.jpg" class="ImgIcon"></image>
 </view>
-<view class='containerOther' wx:for="{{Collection}}" bindlongtap="generate2Dcode" bindtap="jumpToCourseDetail" >
+<view class='containerOther' wx:for="{{Collection}}" bindlongtap="generate2Dcode" bindtap="jumpToCourseDetail" data-id="{{item.id}}" id="{{item.id}}">
   <view class='containerOtherInside'>
     <image src="../../image/java.jpg" class="ImageKnow"></image>
     <text class='textTittle'>{{item.title}}</text>
-    <text class='textContent'>{{item.memo}}</text>
-    <view></view>
+    <text class='textContent'>{{item.location}}</text>
+    <view><button class='textTittleL' catchtap="generate2Dcode" data-id="{{item.id}}">二维码</button></view>
   </view>
   <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
   <view class="modalDlg" wx:if="{{showModal}}">

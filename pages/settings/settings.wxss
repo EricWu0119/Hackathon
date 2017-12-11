@@ -45,6 +45,14 @@
   top: 33rpx;
 }
 
+.textTittleL {
+  color: #222;
+  font-size: 32rpx;
+  position: absolute;
+  left: 500rpx;
+  top: 33rpx;
+}
+
 .textContent {
   color: #999;
   font-size: 24rpx;

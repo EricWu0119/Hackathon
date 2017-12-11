@@ -138,6 +138,7 @@ Page({
     app.wxRequest("/courseParticipant/getTeacherByScheduleId/" + courseId, requestConf2);
 
     var signP = app.getUserInfoP().then((userInfo) => {
+      console.log("get user returned");
       let requestConf1 = {
         data: {
           courseId: courseId,
@@ -148,7 +149,7 @@ Page({
       return app.wxRequestP("/courseParticipant/is_checkin", requestConf1);
     }).then((res)=>{
       var checkInValue = res.data.checkIn;
-
+      console.log("is checkin returned");
       if (checkInValue == 1) {
         that.setData({ isNeedSign: false });
       } else {

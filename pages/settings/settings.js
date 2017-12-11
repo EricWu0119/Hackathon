@@ -54,34 +54,24 @@ Page({
   },
   onLoad: function () {
     var that = this//不要漏了这句，很重要
-    wx.request({
-      url: 'https://www.todaynowork.group/wechat-du-1.0/course/all',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      success: function (res) {
-        //将获取到的json数据，存在名字叫zhihu的这个数组中
-        that.setData({
-          Collection: res.data,
-          //res代表success函数的事件对，data是固定的，stories是是上面json数据中stories
-
-        })
-      }
-    })
-
+    app.wxRequestP("/courseSchedule/all",{}).then((res)=>{
+      //将获取到的json数据，存在名字叫zhihu的这个数组中
+      that.setData({
+        Collection: res.data,
+      })
+    });
   },
   generate2Dcode: function (e) {
     this.setData({
       showModal: true
     })
-
+    var courseScheduleId = e.currentTarget.dataset.id
     var data = {
       wechatConf: {
-        "path": "pages/My_management/My_management?index=678dd99"
+        "path": "pages/index/index?id=" + courseScheduleId
       },
-      objectId: "12345678",
-      scene: "CREG",
-      replace: true
+      objectId: courseScheduleId,
+      scene: "CREG"
     };
 
     var that = this;
@@ -104,7 +94,7 @@ Page({
 
   jumpToCourseDetail: function (e) {
     wx.reLaunch({
-      url: '../index/index'
+      url: '../index/index?id=' + e.currentTarget.dataset.id
     })
   },
   jumpToCourseDetail1: function (e) {

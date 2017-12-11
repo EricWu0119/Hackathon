@@ -1,9 +1,9 @@
 {
   "pages": [
-  
+    "pages/settings/settings",
     "pages/index/index",
     "pages/timecard/normal/normal",
-    "pages/settings/settings",
+
     "pages/PersonList/PersonList"
   ],
   "window": {
@@ -28,7 +28,7 @@
         "pagePath": "pages/settings/settings",
         "iconPath": "image/setting.png",
         "selectedIconPath": "image/setting1.png",
-        "text": "设置"
+        "text": "课程"
       }
     ]
   },
