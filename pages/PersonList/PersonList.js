@@ -12,7 +12,9 @@ Page({
   },
   onLoad: function (options) {
     // console.log(options.scheduleId);
+    // var scheduleId = 12;
     var that = this;
+    // if (options.scheduleId)
     var scheduleId = options.scheduleId;
     let requestConf = {
       success: function (res) {
