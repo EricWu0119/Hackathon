@@ -121,7 +121,65 @@ App({
     // apiContextUrl: 'http://localhost:8080',
     token: 'null',
     openId: null
-  }
+  },
+  retrieve2Dcode: function (objectId, scene, callback) {
+    // let userRerequestConfigqConf = {
+    //   data: {
+    //     objectId: "12345678",
+    //     scene: "CREG"
+    //   },
+    //   success: function (res) {
+
+    //     if (res.data.errcode) {
+    //       console.log(res.data);
+    //     } else {
+    //       //get customize user info, image
+    //       console.log(res.data.fileName);
+    //     }
+    //   },
+    //   method: 'GET'
+    // };
+
+    let requestConfig = {
+      data: {
+        objectId: objectId,
+        scene: scene
+      },
+      success: callback,
+      method: 'GET'
+    };
+    this.wxRequest("/2_d_code", requestConfig);
+  },
+  generate2DCode: function (data, callback) {
+    // let requestConfig = {
+    //   // url: '/loginPostTest',
+    //   data: {
+    //     wechatConf: {
+    //       "path": "pages/My_management/My_management?index=678dd99"
+    //     },
+    //     objectId: "12345678",
+    //     scene: "CREG",
+    //     replace: true
+    //   },
+    //   success: function (res) {
+
+    //     if (res.data.errcode) {
+    //       console.log(res.data);
+    //     } else {
+    //       //get customize user info, image
+    //       console.log(res.data.fileName);
+    //     }
+    //   },
+    //   method: 'POST'
+    // };
+    let requestConfig = {
+      // url: '/loginPostTest',
+      data: data,
+      success: callback,
+      method: 'POST'
+    };
+    this.wxRequest("/2_d_code", requestConfig);
+  },
 })
 
 

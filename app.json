@@ -1,9 +1,10 @@
 {
   "pages": [
+  
     "pages/index/index",
     "pages/timecard/normal/normal",
-    "pages/PersonList/PersonList",
-    "pages/settings/settings"
+    "pages/settings/settings",
+    "pages/PersonList/PersonList"
   ],
   "window": {
     "navigationBarBackgroundColor": "#F9F9F9",

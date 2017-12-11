@@ -11,7 +11,14 @@ function formatTime(date) {
 
   return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
+// function ALLcouse(couse) {
+//   var title = couse.getTitle()
+//   var memo = couse.getMemo()
 
+
+
+//   return [title, memo]
+// }
 // 返回当前日期 YYYY-MM-DD
 function formatDateForPicker(date, flag) {
   var year = date.getFullYear()

@@ -30,5 +30,4 @@
   <button class='ClaimButton' bindtap='ClockIn' disabled='{{!isNeedSign}}'>
     <text>{{isNeedSign==true? "请签到":"已签到"}}</text>
   </button>
-
 </view>
