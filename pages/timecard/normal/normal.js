@@ -138,9 +138,7 @@ Page({
     });
     var id = this.data.id;
     console.log(id);
-    wx.navigateTo({
-      url: '../../PersonList/PersonList?scheduleId=' + id,
-    });
+
     var that = this //创建一个名为that的变量来保存this当前的值  
 
     let requestConf = {
@@ -156,6 +154,9 @@ Page({
           title: '预约成功',
           icon: 'success',
           duration: 3000
+        });
+        wx.navigateTo({
+          url: '../../PersonList/PersonList?scheduleId=' + id,
         });
       }, fail: function (res) {
         console.log(res.data)

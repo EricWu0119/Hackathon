@@ -23,11 +23,12 @@
     <view class='form'>
       <view>
         <image src="../../image/people.png" class="Imgall"></image>
-        <text class='textAll'>{{item.lecturer}}</text>
+        <text class='textAll'>{{name}}</text>
       </view>
     </view>
   </view>
-  <button class='ClaimButton' bindtap='ClockIn' disabled='{{!isNeedSign}}'>
-    <text>{{isNeedSign==true? "请签到":"已签到"}}</text>
+   <!-- <button class='ClaimButton' bindtap='ClockIn'>  -->
+      <button class='ClaimButton' bindtap='ClockIn' disabled='{{isLoading}}'>  
+    <text>{{isNeedSign==true? "请签到":"取消"}}</text>
   </button>
 </view>

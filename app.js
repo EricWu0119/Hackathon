@@ -1,3 +1,4 @@
+var wsAPI = require('utils/wsAPI.js')
 //app.js
 App({
   onLaunch: function () {
@@ -22,9 +23,71 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
+    // var that = this;
+    // this.getUserInfoP()
+    //   .then((userInfo)=>{
+    //     console.log(userInfo)
+    //     that.globalData.userInfo = userInfo
+    //   });
+  },
+  getUserInfoP: function () {
+    var that = this;
+    var userInfo = {}
+    if(that.globalData.userInfo){
+      return new Promise((resolve, reject) => {
+        resolve(that.globalData.userInfo);
+      });
+    }else{
+      return wsAPI.login()
+      .then((res)=>{
+        if (res.code) {
+
+          //发起网络请求
+          let openIdReqConf = {
+            data: {
+              code: res.code
+            },
+            method:'POST'
+          };
+          return that.wxRequestP("/login", openIdReqConf);
+        }
+
+      }).then((res)=>{
+          that.globalData.token = res.data.sessionid;
+          that.globalData.openId = res.data.openId;
+          return wsAPI.getUserInfo({
+                      withCredentials: true
+                    });
+      }).then((res)=>{
+          userInfo = res.userInfo;
+          let userReqConf = {
+              data: {
+                // openId: that.globalData.openId,
+                avatarUrl: res.userInfo.avatarUrl,
+                // email: '',
+                nickName: res.userInfo.nickName
+              },
+              method: 'POST'
+          };
+          return that.wxRequestP("/user", userReqConf);
+      },()=>wsAPI.stop()).then((res)=>{
+
+        return new Promise((resolve, reject) => {
+          if (res.data.errcode) {
+            console.log(res.data);
+            reject(res.data);
+          } else {
+            //get customize user info, image
+            userInfo.email = res.data.email;
+            userInfo.userId = res.data.id;
+            that.globalData.userInfo = userInfo
+            resolve(userInfo);
+          }
+        });
+      });      
+    }
 
   },
-
   getUserInfo: function (cb) {
     var that = this
     if (this.globalData.userInfo) {
@@ -99,6 +162,15 @@ App({
         }
       });
     }
+  },
+  wxRequestP: function (apiPath, requestConf) {
+    let url = this.globalData.apiContextUrl + apiPath;
+    requestConf.url = url;
+    if (this.globalData.token) {
+      requestConf.header = requestConf.header || {};
+      requestConf.header['x-auth-token'] = this.globalData.token;
+    }
+    return wsAPI.request(requestConf);
   },
   wxRequest: function (apiPath, requestConf) {
     let url = this.globalData.apiContextUrl + apiPath;
