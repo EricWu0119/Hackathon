@@ -25,7 +25,7 @@ Page({
     openid:{},
     errorMessage: "提示消息",
     UI: [
-      { checkType: "打卡目的", current: "Internet ID", locName: "位置名称", locDesc: "详细位置", locNameContent: "等待获取", locDescContent: "等待获取", locButton: "更新定位", submitButton: "提交" }
+      { checkType: "打卡目的", current: "Internet ID", locName: "位置名称", locDesc: "详细位置", locNameContent: "点击重新获取", locDescContent: "点击重新获取", locButton: "重新定位", submitButton: "提交" }
     ]
   },
   onLoad: function (options) {
@@ -121,6 +121,38 @@ Page({
     this.setData({
       email: e.detail.value
     });
+  },
+  relocate: function () {
+    this.setData({
+      loading: true
+    })
+    var selectedLanguage = app.globalData.settings.language;
+    var toastTitle = ['定位成功', 'Got Location', '取得完了'][selectedLanguage];
+    var that = this;
+    var ui = that.data.UI
+    var amap = new amapFile.AMapWX({ key: '8ebbe699d71eed6674889848604e411a' });
+
+    amap.getRegeo({
+      success: function (data) {
+        console.log(data)
+        //成功回调
+        wx.showToast({
+          title: toastTitle,
+          icon: 'success',
+          duration: 1000
+        })
+        // 改写UI，反映在视图层
+        ui[selectedLanguage].locNameContent = data[0].name
+        ui[selectedLanguage].locDescContent = data[0].desc
+        that.setData({
+          UI: ui,
+          loading: false,
+          latitude: data[0].latitude,
+          longitude: data[0].longitude,
+        })
+      }
+    })
+
   },
   bindPublish: function (e) {
     if (this.data.email === undefined || this.data.email === "") {
