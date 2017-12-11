@@ -80,7 +80,7 @@ icon {
   display: none;
 }
 .weui-cell_active {
-  background-color: #ECECEC;
+  background-color: #989898;
 }
 .weui-cell_primary {
   -webkit-box-align: start;

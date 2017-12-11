@@ -9,7 +9,7 @@
 .form {
   border-bottom: 3rpx solid #ddd;
   font-size: 32rpx;
-  height: 88rpx;
+  height: 68rpx;
   position: relative;
   font-family: PingFangSC-Regular;
   background-color: #fff;
@@ -23,12 +23,13 @@
   position: absolute;
   left: 48rpx;
   top: 16rpx;
+  border-radius:50% 50% 50% 50%;
 }
 
 .textAll {
   position: absolute;
   left: 160.25rpx;
-  top: 15rpx;
+  top: 10rpx;
 
   /* font-size: 28rpx; */
 }

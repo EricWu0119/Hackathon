@@ -3,7 +3,6 @@
     "pages/settings/settings",
     "pages/index/index",
     "pages/timecard/normal/normal",
-
     "pages/PersonList/PersonList"
   ],
   "window": {
