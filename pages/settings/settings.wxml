@@ -29,14 +29,12 @@
     <text class='textContent'>{{item.location}}</text>
     <view>
       <image class="Img2" src="../../image/erweima.png" catchtap="generate2Dcode" data-id="{{item.id}}"></image>
-      <image class="Img3" src="../../image/people.png" catchtap="gotoList" data-id="{{item.id}}"></image>
+      <image class="Img3" src="../../image/list.png" catchtap="gotoList" data-id="{{item.id}}"></image>
     </view>
   </view>
-  <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}" catchtap="cancelDlg"></view>
-  <view class="modalDlg" wx:if="{{showModal}}">
-    <!-- <icon type="cancel" size="23"></icon> -->
-    <image  class="imgStyle" mode="{{mode}}" src="{{src}}"></image>
-    
-    <!-- <button bindtap="go">点我可以关掉对话框</button>  -->
-  </view>
 </view>
+  <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+  <view class="modalDlg" wx:if="{{showModal}}">
+    <icon type="cancel" size="23" bindtap="cancelDlg"></icon>  
+    <image  class="imgStyle" mode="{{mode}}" src="{{src}}"></image>
+  </view>

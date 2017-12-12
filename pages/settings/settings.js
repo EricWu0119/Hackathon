@@ -106,12 +106,12 @@ Page({
   },
 
   jumpToCourseDetail: function (e) {
-    wx.reLaunch({
+    wx.navigateTo({
       url: '../index/index?id=' + e.currentTarget.dataset.id
     })
   },
   jumpToCourseDetail1: function (e) {
-    wx.reLaunch({
+    wx.navigateTo({
       url: '../index/index'
     })
   },
