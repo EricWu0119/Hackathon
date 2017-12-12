@@ -90,7 +90,7 @@ Page({
     var that = this;
     app.generate2DCode(data, function (res) {
       that.setData({
-        src: app.globalData.apiContextUrl + "/2_d_code/" + res.data.fileName + "/"
+        src: app.globalData.apiContextUrl + "/2_d_code/img/" + res.data.fileName + "/"
       });
     });
   },
