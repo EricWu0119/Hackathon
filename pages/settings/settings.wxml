@@ -1,13 +1,13 @@
-  <!-- <import src="../common/head.wxml" />
+<!-- <import src="../common/head.wxml" />
 <import src="../common/foot.wxml" />
 <view>
   <button class='ClaimButton' bindtap='ClockIn'>
     <text>生成二维码</text>
   </button>
 </view>  -->
- <view class="swiper-container">  
+<view class="swiper-container">
 
-  <swiper autoplay="auto" interval="5000" duration="500" current="{{swiperCurrent}}" bindchange="swiperChange" bindtap='jumpToCourseDetail1'class="swiper">
+  <swiper autoplay="auto" interval="5000" duration="500" current="{{swiperCurrent}}" bindchange="swiperChange" bindtap='jumpToCourseDetail1' class="swiper">
     <block wx:for="{{slider}}" wx:key="unique">
       <swiper-item>
         <image src="{{item.picUrl}}" class="img"></image>
@@ -21,35 +21,18 @@
   </view>
 </view>
 
-<!-- <view class='Videostyle'>
-<view>
-  <text class="textStyle">视频课程</text>
-  <image src="../../image/more.png" class="ImgIcon"></image>
-</view>
-<view class="content">
-  <view class="content-item" wx:for="{{contentItems}}">
-    <image src="../../image/img2.png" />
-    <view class="content-item-text">
-      <text>这里是标题</text>
-    </view>
-  </view>
-</view>
-</view> -->
-
-<view class='DocStyle'>
-  <text class="textStyle">文档教程</text>
-  <image src="../../image/java.jpg" class="ImgIcon"></image>
-</view>
 <view class='containerOther' wx:for="{{Collection}}" bindlongtap="generate2Dcode" bindtap="jumpToCourseDetail" data-id="{{item.id}}" id="{{item.id}}">
   <view class='containerOtherInside'>
     <image src="../../image/java.jpg" class="ImageKnow"></image>
     <text class='textTittle'>{{item.title}}</text>
     <text class='textContent'>{{item.location}}</text>
-    <view><button class='textTittleL' catchtap="generate2Dcode" data-id="{{item.id}}">二维码</button></view>
+    <view>
+      <image class="Img2" src="../../../image/erweima.png" catchtap="generate2Dcode" data-id="{{item.id}}"></image>
+    </view>
   </view>
   <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
   <view class="modalDlg" wx:if="{{showModal}}">
-      <image bindtap="go" class="imgStyle" mode="{{mode}}" src="{{src}}"></image>
-      <!-- <button bindtap="go">点我可以关掉对话框</button> -->
+    <image bindtap="go" class="imgStyle" mode="{{mode}}" src="{{src}}"></image>
+    <!-- <button bindtap="go">点我可以关掉对话框</button> -->
   </view>
 </view>
