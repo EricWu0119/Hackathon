@@ -34,7 +34,7 @@
   width: 120rpx;
   height: 120rpx;
   position: absolute;
-  left: 20.25rpx;
+  left: 16.25rpx;
   top: 38rpx;
 }
 
@@ -42,7 +42,7 @@
   color: #222;
   font-size: 32rpx;
   position: absolute;
-  left: 165.75rpx;
+  left: 152rpx;
   top: 33rpx;
 }
 
@@ -58,7 +58,7 @@
   color: #999;
   font-size: 24rpx;
   position: absolute;
-  left: 165.75rpx;
+  left: 152rpx;
   top: 88rpx;
 }
 
@@ -196,20 +196,20 @@
   background-color: #eee;
 }
 
-.Img2 {
+  .Img2 {
   width: 45rpx;
   height: 45rpx;
   /* border-radius: 50%; */
   position: absolute;
   right: 40rpx;
-  top: 45rpx;
+  top: 41rpx;
 }
 
 .Img3 {
-  width: 43rpx;
-  height: 43rpx;
+  width: 41rpx;
+  height: 41rpx;
   /* border-radius: 50%; */
   position: absolute;
-  right: 40rpx;
-  top: 110rpx;
+  right: -7rpx;
+  top: 43rpx;
 }

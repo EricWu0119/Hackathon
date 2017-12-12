@@ -106,7 +106,45 @@ Page({
       showModal: false
     })
   },
+  longTap: function (e) {
+    wx.downloadFile({
+      url: "https://todaynowork.group/wechat-du-1.0/2_d_code/img/bbbe30b0-9304-4619-8345-6b2157e31416.jpg/",
+      success:
+      function (res) {
+        console.log(res);
+        //图片保存到本地
+        wx.saveImageToPhotosAlbum({
+          filePath: res.tempFilePath,
+          success:
+          function (data) {
+            console.log(data);
+          },
+          fail:
+          function (err) {
+            console.log(err);
+            if
+ (err.errMsg === "saveImageToPhotosAlbum:fail auth deny") {
+              console.log("用户一开始拒绝了，我们想再次发起授权")
+              console.log('打开设置窗口')
+              wx.openSetting({
+                success(settingdata) {
+                  console.log(settingdata)
+                  if
+ (settingdata.authSetting['scope.writePhotosAlbum']) {
+                    console.log('获取权限成功，给出再次点击图片保存到相册的提示。')
+                  }
+                  else {
+                    console.log('获取权限失败，给出不给权限就无法正常使用的提示')
+                  }
+                }
+              })
+            }
+          }
+        })
+      }
+    })
 
+  },
   jumpToCourseDetail: function (e) {
     wx.navigateTo({
       url: '../index/index?id=' + e.currentTarget.dataset.id

@@ -35,5 +35,5 @@
 </view>
   <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"bindtap="cancelDlg"></view>
   <view class="modalDlg" wx:if="{{showModal}}">
-    <image  class="imgStyle" mode="{{mode}}" src="{{src}}" catchtap='cancelDlg'></image>
+    <image  bindlongtap="longTap" bindtouchstart="touchStart" bindtouchend="touchEnd" class="imgStyle" mode="{{mode}}" src="{{src}}" catchtap='cancelDlg'></image>
   </view>
