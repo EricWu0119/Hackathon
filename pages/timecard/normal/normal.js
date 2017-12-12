@@ -42,9 +42,9 @@ Page({
     // console.log(userInfo);
 
     // 获得传来CourseID
-    let info = JSON.parse(options.infoStr);
+    // let info = JSON.parse(options.infoStr);
     this.setData({
-      id: info.id
+      id: options.id
     });
     // var id = info.id;
     // console.log(id);

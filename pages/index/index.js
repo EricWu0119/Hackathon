@@ -35,10 +35,10 @@ Page({
   ClockIn: function (e){
     var info = this.data.list[0];
     if(this.data.isNeedSign){
-      let infoStr = JSON.stringify(info);
+      // let infoStr = JSON.stringify(info);
       // console.log(info);
       wx.navigateTo({
-        url: '../timecard/normal/normal?infoStr=' + infoStr,
+        url: '../timecard/normal/normal?id=' + info.id,
       })
     }else{
       let requestConf = {
