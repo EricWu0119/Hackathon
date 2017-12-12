@@ -108,38 +108,17 @@ Page({
     wx.showLoading({
       title: '正在加载',
     })
-    var courseP = app.wxRequestP("/courseSchedule/" + courseId, {}).then((res)=>{
-      var data = res.data;
-      console.log(data);
-      var temp = [];
-      temp.push(data);
-      that.setData({ list: temp });
-      var startTime = util.formatTime(new Date(res.data.startTime));
-      var endEndtime = util.formatTime(new Date(res.data.endEndtime));
-      that.setData({
-        startTime: startTime,
-        endEndtime: endEndtime
-      });
-      console.log(startTime);
-    });
+    
 
-    let  requestConf2 = {
-      success: function (res) {
-        var data = res.data;
-        console.log(data);
-        // var temp = [];
-        // temp.push(data);
-        if (data){
-          that.setData({ teachers: data });
-        }
-
-      },
-      fail: function (error) {
-        console.log(error)
-      }
-    };
-
-    app.wxRequest("/courseParticipant/getTeacherByScheduleId/" + courseId, requestConf2);
+    // app.wxRequestP("/courseParticipant/getTeacherByScheduleId/" + courseId, {}).then((res)=>{
+    //   var data = res.data;
+    //   console.log(data);
+    //   // var temp = [];
+    //   // temp.push(data);
+    //   if (data) {
+    //     that.setData({ teachers: data });
+    //   }
+    // });
 
     var signP = app.getUserInfoP().then((userInfo) => {
       console.log("get user returned");
@@ -150,24 +129,57 @@ Page({
         }
       }
 
-      return app.wxRequestP("/courseParticipant/is_checkin", requestConf1);
-    }).then((res)=>{
-      var checkInValue = res.data.checkIn;
-      console.log("is checkin returned");
-      if (checkInValue == 1) {
-        that.setData({ isNeedSign: false });
-      } else {
-        that.setData({ isNeedSign: true });
-      }
+      var isCheckIn = app.wxRequestP("/courseParticipant/is_checkin", requestConf1).then((res) => {
+        var checkInValue = res.data.checkIn;
+        console.log("is checkin returned");
+        if (checkInValue == 1) {
+          that.setData({ isNeedSign: false });
+        } else {
+          that.setData({ isNeedSign: true });
+        }
+      })
+
+      var getTeacher = app.wxRequestP("/courseParticipant/getTeacherByScheduleId/" + courseId, {}).then((res) => {
+        var data = res.data;
+        console.log(data);
+        // var temp = [];
+        // temp.push(data);
+        if (data) {
+          that.setData({ teachers: data });
+        }
+      });
+
+      var courseP = app.wxRequestP("/courseSchedule/" + courseId, {}).then((res) => {
+        var data = res.data;
+        console.log(data);
+        var temp = [];
+        temp.push(data);
+        that.setData({ list: temp });
+        var startTime = util.formatTime(new Date(res.data.startTime));
+        var endEndtime = util.formatTime(new Date(res.data.endEndtime));
+        that.setData({
+          startTime: startTime,
+          endEndtime: endEndtime
+        });
+        console.log(startTime);
+      });
+
+      Promise.all([courseP, getTeacher, isCheckIn]).then((values) => {
+        wx.hideLoading()
+        // that.data.isLoading = false;
+        that.setData({
+          isLoading: false
+        })
+      });
     });
     
-    Promise.all([courseP,signP]).then((values)=>{
-      wx.hideLoading()
-      // that.data.isLoading = false;
-      that.setData({
-        isLoading:false
-      })
-    });
+    // Promise.all([courseP, getTeacher, isCheckIn]).then((values)=>{
+    //   wx.hideLoading()
+    //   // that.data.isLoading = false;
+    //   that.setData({
+    //     isLoading:false
+    //   })
+    // });
 
   },
   util: function (currentStatu) {
