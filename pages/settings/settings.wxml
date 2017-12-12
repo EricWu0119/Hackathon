@@ -33,8 +33,7 @@
     </view>
   </view>
 </view>
-  <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+  <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"bindtap="cancelDlg"></view>
   <view class="modalDlg" wx:if="{{showModal}}">
-    <icon type="cancel" size="23" bindtap="cancelDlg"></icon>  
-    <image  class="imgStyle" mode="{{mode}}" src="{{src}}"></image>
+    <image  class="imgStyle" mode="{{mode}}" src="{{src}}" catchtap='cancelDlg'></image>
   </view>
