@@ -105,7 +105,7 @@ Page({
       isLoading:true
     })
     wx.showLoading({
-      title: '正在初始化',
+      title: '正在加载',
     })
     var courseP = app.wxRequestP("/courseSchedule/" + courseId, {}).then((res)=>{
       var data = res.data;

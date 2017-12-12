@@ -1,3 +1,5 @@
+/**index.wxss**/
+@import "../common/lib/weui.wxss";
 /* .ClaimButton {
   background-color: #41a1e8;
   width: 90%;
