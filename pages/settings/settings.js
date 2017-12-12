@@ -13,6 +13,8 @@ Page({
       { picUrl: '../../image/java.jpg' },
     ],
     contentItems: ['', '', '', ''],
+
+    Collection: [],
   },// 触摸开始时间
 
   touchStartTime: 0,
@@ -53,12 +55,23 @@ Page({
 
   },
   onLoad: function () {
-    var that = this//不要漏了这句，很重要
-    app.wxRequestP("/courseSchedule/all",{}).then((res)=>{
+
+    wx.showLoading({
+      title: '正在初始化',
+    })
+    var that = this;
+    app.getUserInfoP()
+      .then((userInfo) => {
+        console.log(userInfo)
+        app.globalData.userInfo = userInfo
+
+        return app.wxRequestP("/courseSchedule/all", {});
+      }).then((res)=>{
       //将获取到的json数据，存在名字叫zhihu的这个数组中
       that.setData({
         Collection: res.data,
       })
+      wx.hideLoading()
     });
   },
   generate2Dcode: function (e) {
