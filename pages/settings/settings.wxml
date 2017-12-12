@@ -26,7 +26,7 @@
   <view class='containerOtherInside'>
     <image src="../../image/java.jpg" class="ImageKnow"></image>
     <text class='textTittle'>{{item.title}}</text>
-    <text class='textContent'>{{item.location}}</text>
+    <text class='textContent'>{{item.desc}}</text>
     <view>
       <image class="Img2" src="../../image/erweima.png" catchtap="generate2Dcode" data-id="{{item.id}}"></image>
       <image class="Img3" src="../../image/list.png" catchtap="gotoList" data-id="{{item.id}}"></image>
