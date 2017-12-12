@@ -164,13 +164,35 @@ App({
     }
   },
   wxRequestP: function (apiPath, requestConf) {
+    var that = this;
     let url = this.globalData.apiContextUrl + apiPath;
     requestConf.url = url;
     if (this.globalData.token) {
       requestConf.header = requestConf.header || {};
       requestConf.header['x-auth-token'] = this.globalData.token;
     }
-    return wsAPI.request(requestConf);
+    return wsAPI.request(requestConf).then(function(res){
+      return new Promise((resolve, reject) => {
+        if (res.statusCode == 200){
+          resolve(res)
+        } else {
+          if (res.statusCode == 403){  //session timeout, relogin
+            that.globalData.userInfo = null
+            wx.reLaunch({
+              url: '../settings/settings',
+            })
+          } else if (res.statusCode == 500 || res.statusCode == 404){
+            wx.showToast({
+              title: '系统错误',
+              icon: 'warn',
+              duration: 3000
+            });
+            console.log("system exception");
+          }
+          reject(res)
+        }
+      });
+    });
   },
   wxRequest: function (apiPath, requestConf) {
     let url = this.globalData.apiContextUrl + apiPath;

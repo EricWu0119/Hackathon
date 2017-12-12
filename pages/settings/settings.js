@@ -71,8 +71,10 @@ Page({
       that.setData({
         Collection: res.data,
       })
+      
+    }).finally(()=>{
       wx.hideLoading()
-    });
+    })
   },
   generate2Dcode: function (e) {
     this.setData({
