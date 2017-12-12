@@ -20,10 +20,10 @@
         <text class='textAll'>{{item.location}}</text>
       </view>
     </view>
-    <view class='form'>
+    <view class='form' wx:for="{{teachers}}" wx:for-item="teach" wx:for-index="teach_id">
       <view>
         <image src="../../image/people.png" class="Imgall"></image>
-        <text class='textAll'>{{name}}</text>
+        <text class='textAll'>* {{teach.nickName}}</text>
       </view>
     </view>
   </view>

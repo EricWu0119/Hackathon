@@ -29,7 +29,8 @@ Page({
   data: {
     list: [],
     isNeedSign:false,
-    isLoading:false
+    isLoading:false,
+    teachers: []
   },
   ClockIn: function (e){
     var info = this.data.list[0];
@@ -124,11 +125,14 @@ Page({
 
     let  requestConf2 = {
       success: function (res) {
-        var data = res.data[0].nickName;
+        var data = res.data;
         console.log(data);
         // var temp = [];
         // temp.push(data);
-        that.setData({ name: data });
+        if (data){
+          that.setData({ teachers: data });
+        }
+
       },
       fail: function (error) {
         console.log(error)
