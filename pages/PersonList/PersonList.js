@@ -7,7 +7,7 @@ Page({
   },
   ReturnHome: function(){
     wx.reLaunch({
-      url: '../index/index',
+      url: '../settings/settings',
     })
   },
   onLoad: function (options) {

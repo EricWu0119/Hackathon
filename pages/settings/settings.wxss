@@ -202,5 +202,14 @@
   /* border-radius: 50%; */
   position: absolute;
   right: 40rpx;
-  top: 60rpx;
+  top: 50rpx;
+}
+
+.Img3 {
+  width: 45rpx;
+  height: 45rpx;
+  /* border-radius: 50%; */
+  position: absolute;
+  right: 40rpx;
+  top: 100rpx;
 }

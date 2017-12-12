@@ -99,7 +99,7 @@ Page({
 
   },
 
-  go: function () {
+  cancelDlg: function () {
     this.setData({
       showModal: false
     })
@@ -113,6 +113,11 @@ Page({
   jumpToCourseDetail1: function (e) {
     wx.reLaunch({
       url: '../index/index'
+    })
+  },
+  gotoList:function(e){
+    wx.reLaunch({
+      url: '../PersonList/PersonList?scheduleId=' + e.currentTarget.dataset.id
     })
   },
   swiperChange: function (e) {

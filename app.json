@@ -11,26 +11,6 @@
     "backgroundColor": "#eeeeee",
     "backgroundTextStyle": "light"
   },
-  "tabBar": {
-    "color": "#7A7E83",
-    "selectedColor": "#006df0",
-    "borderStyle": "black",
-    "backgroundColor": "#ffffff",
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "iconPath": "image/calendar.png",
-        "selectedIconPath": "image/calendar1.png",
-        "text": "签到"
-      },
-      {
-        "pagePath": "pages/settings/settings",
-        "iconPath": "image/setting.png",
-        "selectedIconPath": "image/setting1.png",
-        "text": "课程"
-      }
-    ]
-  },
   "networkTimeout": {
     "request": 10000,
     "connectSocket": 10000,
