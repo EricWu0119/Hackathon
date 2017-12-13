@@ -5,7 +5,7 @@
     <text>生成二维码</text>
   </button>
 </view>  -->
-<view class="swiper-container">
+<view class="swiper-container" >
 
   <swiper autoplay="auto" interval="5000" duration="500" current="{{swiperCurrent}}" bindchange="swiperChange" bindtap='jumpToCourseDetail1' class="swiper">
     <block wx:for="{{slider}}" wx:key="unique">
@@ -37,3 +37,9 @@
   <view class="modalDlg" wx:if="{{showModal}}">
     <image  bindlongtap="longTap" bindtouchstart="touchStart" bindtouchend="touchEnd" class="imgStyle" mode="{{mode}}" src="{{src}}" catchtap='cancelDlg'></image>
   </view>
+  <action-sheet hidden="{{actionSheetHidden}}" bindchange="actionSheetbindchange">
+    <block wx:for-items="{{actionSheetItems}}">
+        <action-sheet-item bindtap="bind{{item.bindtap}}">{{item.txt}}</action-sheet-item>
+    </block>
+    <action-sheet-cancel class="cancel">取消</action-sheet-cancel>
+</action-sheet>

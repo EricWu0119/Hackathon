@@ -1,12 +1,12 @@
 var app = getApp()
 Page({
   data: {
-    duration: 2000,
-    indicatorDots: true,
-    autoplay: true,
-    interval: 3000,
-    loading: false,
-    plain: false,
+    actionSheetHidden: true,
+    actionSheetItems: [
+      { bindtap: 'Menu1', txt: '保存二维码到相册' },
+      // { bindtap: 'Menu2', txt: '取消' },
+    ],
+
     slider: [
       { picUrl: '../../image/vue.jpg' },
       { picUrl: '../../image/ionic.jpg' },
@@ -106,9 +106,43 @@ Page({
       showModal: false
     })
   },
-  longTap: function (e) {
-    wx.downloadFile({
-      url: "https://todaynowork.group/wechat-du-1.0/2_d_code/img/bbbe30b0-9304-4619-8345-6b2157e31416.jpg/",
+  longTap: function () {
+    this.actionSheetTap()
+  },
+  jumpToCourseDetail: function (e) {
+    wx.navigateTo({
+      url: '../index/index?id=' + e.currentTarget.dataset.id
+    })
+  },
+  jumpToCourseDetail1: function (e) {
+    wx.navigateTo({
+      url: '../index/index'
+    })
+  },
+  gotoList:function(e){
+    wx.reLaunch({
+      url: '../PersonList/PersonList?scheduleId=' + e.currentTarget.dataset.id
+    })
+  },
+  swiperChange: function (e) {
+    this.setData({
+      swiperCurrent: e.detail.current
+    })
+  },
+
+  actionSheetTap: function () {
+    this.setData({
+      actionSheetHidden: !this.data.actionSheetHidden
+    })
+  },
+  actionSheetbindchange: function () {
+    this.setData({
+      actionSheetHidden: !this.data.actionSheetHidden
+    })
+  },
+  bindMenu1: function () {
+      wx.downloadFile({
+      url: this.data.src,
       success:
       function (res) {
         console.log(res);
@@ -116,8 +150,7 @@ Page({
         wx.saveImageToPhotosAlbum({
           filePath: res.tempFilePath,
           success:
-          function (data) {
-            console.log(data);
+          function () {
           },
           fail:
           function (err) {
@@ -143,26 +176,14 @@ Page({
         })
       }
     })
+  this.setData({
+      showModal: false
+    })
+  },
+  // bindMenu2: function () {
+  //   this.setData({
+  //     showModal: false
+  //   })
+  // }
 
-  },
-  jumpToCourseDetail: function (e) {
-    wx.navigateTo({
-      url: '../index/index?id=' + e.currentTarget.dataset.id
-    })
-  },
-  jumpToCourseDetail1: function (e) {
-    wx.navigateTo({
-      url: '../index/index'
-    })
-  },
-  gotoList:function(e){
-    wx.reLaunch({
-      url: '../PersonList/PersonList?scheduleId=' + e.currentTarget.dataset.id
-    })
-  },
-  swiperChange: function (e) {
-    this.setData({
-      swiperCurrent: e.detail.current
-    })
-  },
 })
