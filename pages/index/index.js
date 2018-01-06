@@ -5,27 +5,6 @@ var wsAPI = require('../../utils/wsAPI.js')
 var app = getApp()
 
 Page({
-  generate2Dcode: function (e) {
-    this.setData({
-      showModal: true
-    })
-
-    var data = {
-      wechatConf: {
-        "path": "pages/My_management/My_management?index=678dd99"
-      },
-      objectId: "12345678",
-      scene: "CREG",
-      replace: true
-    };
-    var that = this;
-    app.generate2DCode(data, function (res) {
-      that.setData({
-        src: app.globalData.apiContextUrl + "/2_d_code/" + res.data.fileName + "/"
-      });
-    });
-
-  },
   data: {
     list: [],
     isNeedSign:false,
@@ -34,13 +13,14 @@ Page({
   },
   ClockIn: function (e){
     var info = this.data.list[0];
-    if(this.data.isNeedSign){
+    if (this.data.flagSign == 0 || this.data.flagSign == 2){
       // let infoStr = JSON.stringify(info);
       // console.log(info);
       wx.navigateTo({
-        url: '../timecard/normal/normal?id=' + info.id,
+        url: '../timecard/normal/normal?id=' + info.id + "&flagSign=" + this.data.flagSign
       })
-    }else{
+    } else if (this.data.flagSign == 1){
+      var that = this;
       let requestConf = {
         method: 'post',
         data: {
@@ -49,8 +29,8 @@ Page({
         },
         success: function (res) {
           console.log(res.data)
-          wx.reLaunch({
-            url: "../PersonList/PersonList?scheduleId=" + info.id
+          wx.navigateTo({
+            url: "../PersonList/PersonList?scheduleId=" + info.id + "&flagSign=" + that.data.flagSign
           });
           wx.showToast({
             title: '取消成功',
@@ -133,9 +113,11 @@ Page({
         var checkInValue = res.data.checkIn;
         console.log("is checkin returned");
         if (checkInValue == 1) {
-          that.setData({ isNeedSign: false });
-        } else {
-          that.setData({ isNeedSign: true });
+          that.setData({ flagSign: 1 });
+        } else if (checkInValue == 0) {
+          that.setData({ flagSign: 0 });
+        } else{
+          that.setData({ flagSign: 2 });
         }
       })
 

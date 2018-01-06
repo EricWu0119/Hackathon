@@ -6,7 +6,7 @@
   <view class='Description'>
     <!-- <image src="../../image/java.png" class='imgTittle'></image> -->
     <view class='formTittle'>
-      <text class="textTittle">已签到名单</text>
+      <text class="textTittle">{{listType == 0?"注册名单":"签到名单"}}</text>
     </view>
     <image class="ImgallHome" src="../../image/home.png" bindtap='ReturnHome'></image>
     <view class='form'  wx:for="{{list}}">

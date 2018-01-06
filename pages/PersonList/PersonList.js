@@ -6,9 +6,14 @@ Page({
     // list: []
   },
   ReturnHome: function(){
-    wx.reLaunch({
-      url: '../settings/settings',
+    // wx.redirectTo({
+    //   url: '../settings/settings',
+    // })
+
+    wx.navigateBack({
+      delta: getCurrentPages().length
     })
+
   },
   onLoad: function (options) {
     // console.log(options.scheduleId);
@@ -16,6 +21,11 @@ Page({
     var that = this;
     // if (options.scheduleId)
     var scheduleId = options.scheduleId;
+    var flagSign = options.flagSign;
+
+    this.setData({
+      listType: (flagSign == 2 ? 0 : 1)
+    });
     let requestConf = {
       success: function (res) {
         var data = res.data;
@@ -27,7 +37,7 @@ Page({
       }
     };
 
-    app.wxRequest("/courseParticipant/getCheckedinByScheduleId/" + scheduleId, requestConf);
+    app.wxRequest("/courseParticipant/getCheckedinByScheduleId/" + scheduleId + "?listType=" + this.data.listType, requestConf);
 
     requestConf = {
       success: function (res) {

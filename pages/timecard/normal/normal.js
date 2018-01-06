@@ -44,7 +44,8 @@ Page({
     // 获得传来CourseID
     // let info = JSON.parse(options.infoStr);
     this.setData({
-      id: options.id
+      id: options.id,
+      flagSign: options.flagSign
     });
     // var id = info.id;
     // console.log(id);
@@ -188,7 +189,7 @@ Page({
           duration: 3000
         });
         wx.navigateTo({
-          url: '../../PersonList/PersonList?scheduleId=' + id,
+          url: '../../PersonList/PersonList?scheduleId=' + id + "&flagSign=" + that.data.flagSign,
         });
       }, fail: function (res) {
         console.log(res.data)
