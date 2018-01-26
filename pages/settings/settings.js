@@ -120,7 +120,7 @@ Page({
     })
   },
   gotoList:function(e){
-    wx.reLaunch({
+    wx.navigateTo({
       url: '../PersonList/PersonList?scheduleId=' + e.currentTarget.dataset.id
     })
   },
@@ -179,11 +179,6 @@ Page({
   this.setData({
       showModal: false
     })
-  },
-  // bindMenu2: function () {
-  //   this.setData({
-  //     showModal: false
-  //   })
-  // }
+  }
 
 })

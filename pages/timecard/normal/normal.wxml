@@ -33,7 +33,10 @@
     </view>
     <!-- Button -->
     <view class="weui-btn-area">
-       <button class="ClaimButton" type="" bindtap="bindPublish">请提交</button> 
+    <form  name='submitMsgFm' report-submit bindsubmit='bindPublish'>
+      <!-- <button class="ClaimButton" type="" bindtap="bindPublish">请提交</button>  -->
+      <button form-type="submit">请提交</button> 
+    </form>
        <!-- <button class="ClaimButton" bindtap="getUserInfo"> 获取头像昵称 </button> -->
     </view>
   </view>

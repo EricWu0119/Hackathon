@@ -180,8 +180,10 @@ Page({
         "mail": this.data.email, //这里是发送给服务器的参数（参数名：参数值） 
         "courseScheduleId": this.data.id,
         "userId": this.data.userId
-      },
-      success: function (res) {
+      }
+    };
+    app.wxRequestP("/courseParticipant/checkin", requestConf)
+    .then(function (res) { //success
         console.log(res.data)
         wx.showToast({
           title: '预约成功',
@@ -191,7 +193,7 @@ Page({
         wx.navigateTo({
           url: '../../PersonList/PersonList?scheduleId=' + id + "&flagSign=" + that.data.flagSign,
         });
-      }, fail: function (res) {
+      },function (res) {   //fail
         console.log(res.data)
         wx.reLaunch({
           url: "../../index/index"
@@ -202,45 +204,69 @@ Page({
           duration: 3000
         });
       }
-    };
-    app.wxRequest("/courseParticipant/checkin", requestConf);
+    ).then((res)=>{
+      return app.wxRequestP("/courseSchedule/" + id, {});
+    }).then(function(res){
+      var data = res.data;
+      console.log(data);
+      var startTime = util.formatTime(new Date(res.data.startTime));
+      var endEndtime = util.formatTime(new Date(res.data.endEndtime));
+      console.log(startTime);
+
+      var fId = e.detail.formId;
+      var fObj = e.detail.value;
+      var d = {
+        page: '/pages/index/index?id=' + data.id,
+        form_id: fId,
+        data: {
+          "keyword1": {
+            "value": data.title,
+            "color": "#4a4a4a"
+          },
+          "keyword2": {
+            "value": data.location,
+            "color": "#9b9b9b"
+          },
+          "keyword3": {
+            "value": "江宓妮",
+            "color": "#9b9b9b"
+          },
+          "keyword4": {
+            "value": startTime + " - " + endEndtime,
+            "color": "#9b9b9b"
+          },
+          "keyword5": {
+            "value": "点击了解报名详情",
+            "color": "#9b9b9b"
+          }
+        },
+        color: '#ccc',
+        emphasis_keyword: 'keyword3.DATA'
+      };
+      app.wxRequestP("/courseParticipant/getTeacherByScheduleId/" + id, {}).then((res) => {
+        var data = res.data;
+        console.log(data);
+        d.data.keyword3.value = data[0].nickName;
+      }).then((res)=>{
+        that.sendMsg('5jqAhf-iMNu03voUmtTTr6nm-akFka0ekNo2ioragfg', d);
+      });
+      
+
+  });
     
     // debugger;
-    // wx.request({
-    //   url: 'https://www.todaynowork.group/wechat-du-1.0//courseParticipant/checkin',
-    //   method: 'post',
-    //   data: {
-    //     "mail": this.data.email, //这里是发送给服务器的参数（参数名：参数值） 
-    //     "courseScheduleId": this.data.id,
-    //     "userId": this.data.userId
-    //   },
-    //   header: {
-    //     'content-type': 'application/json' // 默认值   
-    //   },
-    //   success: function (res) {
+  },
+  sendMsg: function (template_id,data) {
+    let requestConfig = {
+      data: data,
+      success: function (data) {
+        console.log(data);
+      },
+      method: 'POST'
+    };
+    //
+    return app.wxRequestP("/send_template/"+template_id, requestConfig);
 
-    //     console.log(res.data)
-    //     wx.showToast({
-    //       title: '预约成功',
-    //       icon: 'success',
-    //       duration: 5000
-    //     });
-    //     wx.reLaunch({
-    //       url: "../../index/index"
-    //     });
-
-    //     // wx.navigateTo({
-    //     //   url: '../../index/index',
-    //     // })
-    //   }, fail: function (res) {
-    //     console.log(res.data)
-    //     wx.showToast({
-    //       title: '预约失败',
-    //       icon: 'success',
-    //       duration: 3000
-    //     });
-    //   }
-    // });
-  }
+  }  
 })
 
